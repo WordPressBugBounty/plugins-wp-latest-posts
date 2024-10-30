@@ -991,7 +991,7 @@ class WPLPFront
                 }
             }
 
-            $offSet = null;
+            $offSet = 0;
             if (isset($this->widget->settings['off_set']) && $this->widget->settings['off_set'] > 0) {
                 $offSet = $this->widget->settings['off_set'];
             }
@@ -1043,7 +1043,7 @@ class WPLPFront
                                 }
                             }
                             $args     = array(
-                                'posts_per_page' => -1,
+                                'posts_per_page' => $limit,
                                 'post_type'      => $post_type,
                                 'orderby'        => $order_by,
                                 'order'          => isset($order) ? $order : '',
@@ -1100,7 +1100,8 @@ class WPLPFront
                             }
                         }
                         $args = array(
-                            'posts_per_page' => -1,
+                            'posts_per_page' => $limit,
+                            'offset'         => $offSet,
                             'post_type'      => $post_type,
                             'orderby'        => $order_by,
                             'order'          => isset($order) ? $order : '',
@@ -2387,10 +2388,11 @@ class WPLPFront
      * @param string $after    After HTML
      * @param string $box_name Name of boxes
      * @param string $links    URL
+     * @param string $target   Link target _blank or empty
      *
      * @return void
      */
-    private function boxContent($before, $after, $box_name, $links)
+    private function boxContent($before, $after, $box_name, $links, $target = '')
     {
         $my_html = '';
 
@@ -2449,7 +2451,7 @@ class WPLPFront
                         $inner_html = $inner;
 
                         if ($this->widget->settings['theme'] === 'material-horizontal' || $field !== 'Category') {
-                            $my_html .= '<a href="'.$links.'" class="'.$link_class.'">';
+                            $my_html .= '<a href="'.$links.'" '. $target.' class="'.$link_class.'">';
                         }
 
                         if ($field === 'Category') {
@@ -3920,7 +3922,7 @@ class WPLPFront
         $after .= '</div>';
         $after .= '</div>';
 
-        $this->boxContent($before, $after, $box_name, $links);
+        $this->boxContent($before, $after, $box_name, $links, $target);
     }
 
     /**

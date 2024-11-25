@@ -80,7 +80,7 @@ if (! function_exists('wplp_divi')) :
 
         wp_enqueue_script(
             'wplp-swiper-js',
-            plugins_url('wp-latest-posts/js/swiper-bundle.js'),
+            plugins_url('wp-latest-posts/js/swiper-bundle.min.js'),
             array(),
             WPLP_VERSION
         );

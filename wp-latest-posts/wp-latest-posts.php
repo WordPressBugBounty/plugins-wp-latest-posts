@@ -3,7 +3,7 @@
  * Plugin Name: WP Latest Posts
  * Plugin URI: http://www.joomunited.com/wordpress-products/wp-latest-posts
  * Description: Advanced frontpage and widget news slider
- * Version: 5.0.9
+ * Version: 5.0.10
  * Text Domain: wp-latest-posts
  * Domain Path: /languages
  * Author: JoomUnited
@@ -79,7 +79,7 @@ if (!defined('WPLP_POST_VIEW_TRANSIENT_KEY')) {
     define('WPLP_POST_VIEW_TRANSIENT_KEY', WPLP_TRANSIENT_KEY_PREFIX . 'wp:wplp_post_view_' . md5('post_view_transient_key'));
 }
 if (!defined('WPLP_VERSION')) {
-    define('WPLP_VERSION', '5.0.9'); // WP Latest Post current version
+    define('WPLP_VERSION', '5.0.10'); // WP Latest Post current version
 }
 //Check plugin requirements
 if (version_compare(PHP_VERSION, '5.6', '<')) {
@@ -196,7 +196,7 @@ new WPLPCategoryImage();
 global $wpcu_wpfn;
 $wpcu_wpfn = new WPLPAdmin(
     array(
-        'version' => '5.0.9',
+        'version' => '5.0.10',
         'translation_domain' => 'wp-latest-posts', // must be copied in the widget class!!!
         'plugin_file' => __FILE__,
     )

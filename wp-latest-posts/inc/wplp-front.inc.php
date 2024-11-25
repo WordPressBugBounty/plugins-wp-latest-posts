@@ -1653,7 +1653,7 @@ class WPLPFront
         } else {
             wp_enqueue_script(
                 'wplp-swiper',
-                plugins_url('wp-latest-posts/js') . '/swiper-bundle.js',
+                plugins_url('wp-latest-posts/js') . '/swiper-bundle.min.js',
                 array('jquery'),
                 '8.4.2',
                 true

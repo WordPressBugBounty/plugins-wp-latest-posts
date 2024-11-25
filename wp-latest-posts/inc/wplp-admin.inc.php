@@ -1720,7 +1720,7 @@ class WPLPAdmin
 
         wp_enqueue_script(
             'wplp-swiper-js',
-            plugins_url('js/swiper-bundle.js', dirname(__FILE__)),
+            plugins_url('js/swiper-bundle.min.js', dirname(__FILE__)),
             array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-data', 'wp-editor'),
             WPLP_VERSION
         );
@@ -2632,7 +2632,7 @@ class WPLPAdmin
                 if ($widget->settings['theme'] === 'default') {
                     $style = WPLP_PLUGIN_DIR . 'themes/'. $widget->settings['theme'] .'/style.css';
                     $stylesheet = '<link rel="'. esc_attr($type) .'" href="'.plugins_url('wp-latest-posts/css/') . 'swiper-bundle.min.css'.'" />';// phpcs:ignore
-                    $script .= '<script src="'.plugins_url('wp-latest-posts/js') . '/swiper-bundle.js'.'"></script>';// phpcs:ignore
+                    $script .= '<script src="'.plugins_url('wp-latest-posts/js') . '/swiper-bundle.min.js'.'"></script>';// phpcs:ignore
                     $scr_url = plugins_url('wp-latest-posts/js/') . 'wplp_front.js?ver='.WPLP_VERSION;// phpcs:ignore
                     $script .= '<script id="wplp-default-front-js" src="'.$scr_url.'"></script>';// phpcs:ignore
                 } else {

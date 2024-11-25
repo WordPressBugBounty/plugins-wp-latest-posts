@@ -271,7 +271,7 @@ class WplpElementorWidget extends \Elementor\Widget_Base
 
         wp_register_script(
             'swiper-wplp',
-            plugins_url('wp-latest-posts/js/') . 'swiper-bundle.js',
+            plugins_url('wp-latest-posts/js/') . 'swiper-bundle.min.js',
             array('jquery'),
             WPLP_VERSION,
             true

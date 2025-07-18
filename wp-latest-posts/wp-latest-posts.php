@@ -3,7 +3,7 @@
  * Plugin Name: WP Latest Posts
  * Plugin URI: http://www.joomunited.com/wordpress-products/wp-latest-posts
  * Description: Advanced frontpage and widget news slider
- * Version: 5.0.10
+ * Version: 5.0.11
  * Text Domain: wp-latest-posts
  * Domain Path: /languages
  * Author: JoomUnited
@@ -79,7 +79,7 @@ if (!defined('WPLP_POST_VIEW_TRANSIENT_KEY')) {
     define('WPLP_POST_VIEW_TRANSIENT_KEY', WPLP_TRANSIENT_KEY_PREFIX . 'wp:wplp_post_view_' . md5('post_view_transient_key'));
 }
 if (!defined('WPLP_VERSION')) {
-    define('WPLP_VERSION', '5.0.10'); // WP Latest Post current version
+    define('WPLP_VERSION', '5.0.11'); // WP Latest Post current version
 }
 //Check plugin requirements
 if (version_compare(PHP_VERSION, '5.6', '<')) {
@@ -150,6 +150,69 @@ if (class_exists('\Joomunited\WPLP\JUCheckRequirements')) {
     }
 }
 
+if (is_admin()) {
+    if (!function_exists('wplpMergePluginMsg')) {
+        /**
+         * Show error when install
+         *
+         * @return void
+         */
+        function wplpMergePluginMsg()
+        {
+            // Check if user dismissed within the last 7 days
+            $dismissed_time = get_user_meta(get_current_user_id(), 'wplp_notice_dismissed_time', true);
+            if ($dismissed_time && (time() - $dismissed_time) < WEEK_IN_SECONDS) {
+                return;
+            }
+            ?>
+            <div class="notice notice-info is-dismissible" id="wplp-merged-plugin-notice">
+                <p><strong>📢 IMPORTANT NOTICE:</strong></p>
+                <p>
+                    As JoomUnited continues to evolve, we’ve decided to merge the free versions of
+                    <strong>WP Meta SEO</strong>, <strong>WP Speed of Light</strong>, and <strong>WP Latest Posts</strong>
+                    into their respective premium editions.
+                </p>
+                <p>
+                    Therefore, this plugin will not be supported while it remains online for a certain period of time. You can use the
+                    <strong>30% OFF coupon</strong> to migrate to the pro version of the plugin: <strong>JU-EVOLVING</strong>
+                </p>
+                <p>
+                    <a href="https://www.joomunited.com/wordpress-products/wp-latest-posts" class="button-primary" target="_blank">Get the new plugin version now >></a> &nbsp;
+                    <a href="https://www.joomunited.com/news/important-announcement-evolving-our-wordpress-extensions-for-better-service-and-performance" target="_blank">Read the full announcement here >></a>
+                </p>
+            </div>
+
+            <script>
+                jQuery(document).ready(function($){
+                    $('#wplp-merged-plugin-notice').on('click', '.notice-dismiss', function(){
+                        $.post(ajaxurl, {
+                            action: 'wplp_dismiss_notice_for_week',
+                            nonce: '<?php echo wp_create_nonce('ju_dismiss_notice');  //phpcs:ignore WordPress.Security.EscapeOutput -- Echo content ?>'
+                        });
+                    });
+                });
+            </script>
+            <?php
+        }
+    }
+    add_action('admin_notices', 'wplpMergePluginMsg');
+
+    add_action('wp_ajax_wplp_dismiss_notice_for_week', 'wplp_dismiss_notice_for_week_callback');
+    /**
+     * Callback function to dismiss notice for a week
+     *
+     * @return void
+     */
+    function wplp_dismiss_notice_for_week_callback()
+    {
+        check_ajax_referer('ju_dismiss_notice', 'nonce');
+
+        update_user_meta(get_current_user_id(), 'wplp_notice_dismissed_time', time());
+
+        wp_send_json_success();
+    }
+}
+
 //Include the jutranslation helpers
 require_once 'jutranslation' . DIRECTORY_SEPARATOR . 'jutranslation.php';
 call_user_func(
@@ -161,17 +224,18 @@ call_user_func(
     'languages' . DIRECTORY_SEPARATOR . 'wp-latest-posts-en_US.mo'
 );
 
-// Include jufeedback helpers
-require_once('jufeedback'. DIRECTORY_SEPARATOR . 'jufeedback.php');
-call_user_func(
-    '\Joomunited\WPLatestPosts\Jufeedback\Jufeedback::init',
-    __FILE__,
-    'wplp',
-    'wp-latest-posts',
-    'WP Latest Posts',
-    'wp-latest-posts'
-);
-
+add_action('admin_init', function () {
+    // Include jufeedback helpers
+    require_once('jufeedback'. DIRECTORY_SEPARATOR . 'jufeedback.php');
+    call_user_func(
+        '\Joomunited\WPLatestPosts\Jufeedback\Jufeedback::init',
+        __FILE__,
+        'wplp',
+        'wp-latest-posts',
+        'WP Latest Posts',
+        'wp-latest-posts'
+    );
+});
 
 // Install
 require_once dirname(__FILE__) . '/inc/install.php';
@@ -196,7 +260,7 @@ new WPLPCategoryImage();
 global $wpcu_wpfn;
 $wpcu_wpfn = new WPLPAdmin(
     array(
-        'version' => '5.0.10',
+        'version' => '5.0.11',
         'translation_domain' => 'wp-latest-posts', // must be copied in the widget class!!!
         'plugin_file' => __FILE__,
     )

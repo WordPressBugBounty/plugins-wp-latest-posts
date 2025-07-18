@@ -2,8 +2,8 @@
 Contributors: JoomUnited
 Tags: latest post, news widget, recent posts, posts, recent post widget, news posts, latest page, custom content, previous posts, page, featured posts, article display, news display, news slider, page display, post display, article display, frontpage news, news
 Requires at least: 4.7
-Tested up to: 6.7
-Stable tag: 5.0.10
+Tested up to: 6.8
+Stable tag: 5.0.11
 Requires PHP: 5.6
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -153,6 +153,9 @@ What's the minimum version of WordPress required to run WP Latest posts? WordPre
  
 
 == Changelog ==
+
+= 5.0.11 =
+ * Add : Admin notice about merging the free version of WP Latest Posts into the Pro version
 
 = 5.0.10 =
  * Fix : Switch to using the minified JS file

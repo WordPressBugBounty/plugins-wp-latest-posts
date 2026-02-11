@@ -12,6 +12,11 @@ Load your content from posts, page, tags or custom post type and display it anyw
 
 == Description ==
 
+## IMPORTANT NOTE ABOUT THIS PLUGIN: 
+After careful consideration, we've decided to merge the free versions of WP Meta SEO, WP Speed of Light, and WP Latest Posts into their respective premium versions. This consolidation will allow us to focus our resources on developing more robust, feature-rich extensions. We do offer some easy migration and prices for free users though.
+
+#### Read the full article: [Blog post announcement](https://www.joomunited.com/news/important-announcement-evolving-our-wordpress-extensions-for-better-service-and-performance "Important announcement: Evolving our extensions for better service and performance").
+
 Get any WordPress content like posts, pages, tagged content or custom post type and display them as a slider. Some additional responsive and designed themes are also available. This is definitively the best way to build a news page without coding anything. WP Latest Posts can be used with all page builders, Gutenberg, WooCommerce in a click and even in custom page layouts using a PHP snippet. We build your news layout, and so you can focus on your content only.
 
 **More details:** <a href="https://www.joomunited.com/wordpress-products/wp-latest-posts" rel="friend"> https://www.joomunited.com/wordpress-products/wp-latest-posts</a>
